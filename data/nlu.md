@@ -1,66 +1,179 @@
-## intent:greet
-- hey
-- hello
-- hi
-- good morning
-- good evening
-- hey there
+version: "2.0"
 
-## intent:goodbye
-- bye
-- goodbye
-- see you around
-- see you later
+nlu:
+- intent: greet
+  examples: |
+    - Oye
+    - Hola
+    - Que tal?
+    - Buenos días
+    - Buenas noches
+    - Oye amigo
 
-## intent:affirm
-- yes
-- indeed
-- of course
-- that sounds good
-- correct
+- intent: goodbye
+  examples: |
+    - Que tengas una buena tarde
+    - Nos vemos
+    - Adios
+    - Nos vemos luego
+    - Que tengas una buena noche
+    - Chau
+    - Ten un buen día
+    - Nos vemos a la vuelta 
+    - Chau chau
 
-## intent:deny
-- no
-- never
-- I don't think so
-- don't like that
-- no way
-- not really
+- intent: affirm
+  examples: |
+    - Si
+    - Afirmativo
+    - Por supuesto
+    - Desde luego
+    - Eso suena bien
+    - Correcto
 
-## intent:mood_great
-- perfect
-- very good
-- great
-- amazing
-- wonderful
-- I am feeling very good
-- I am great
-- I'm good
+- intent: deny
+  examples: |
+    - No
+    - Negativo
+    - Nunca
+    - No lo creo
+    - No me gusta eso
+    - De ninguna manera
+    - Realmente no
 
-## intent:mood_unhappy
-- sad
-- very sad
-- unhappy
-- bad
-- very bad
-- awful
-- terrible
-- not very good
-- extremely sad
-- so sad
+- intent: mood_great
+  examples: |
+    - Perfecto
+    - Estupendo
+    - Increible
+    - Sintiendome como un rey
+    - Maravilloso
+    - Me siento muy bien
+    - Estoy genial
+    - Estoy asombroso
+    - Voy a salvar el mundo
+    - Super avivado
+    - Extremadamente bien
+    - Tan tan perfecto
+    - Tan bien
+    - Tan perfecto
 
-## intent:bot_challenge
-- are you a bot?
-- are you a human?
-- am I talking to a bot?
-- am I talking to a human?
+- intent: mood_unhappy
+  examples: |
+    - Mi día fue horrible
+    - Estoy triste
+    - No me siento muy bien
+    - Estoy decepcionado
+    - Super triste
+    - Estoy muy triste
+    - Triste
+    - Muy triste
+    - Infeliz
+    - No bueno
+    - No muy bueno
+    - Extremadamente triste
+    - Muy triste
+    - Estoy mal
+    - No estoy bien
+    - No me encuentro bien
+
+- intent: bot_challenge
+  examples: |
+    - Eres un bot?
+    - Eres humano?
+    - Estoy hablando con un bot?
+    - Estoy hablando con un humano?
 
 
-## intent:live_score
-- live score
-- ind vs wi live score
+- intent: food
+  examples: |
+    - Cual es tu comida favorita?
+    - Que comida es tu favorita?
+    - Que comida prefieres?
+    - Tienes alguna comida favorita?
+    - Te gusta algun tipo de comida?
 
-## intent:helloworld_action
-- world
-- programming
-- first program
+- intent: movie
+  examples: |
+    - Cual es tu pelicula favorita?
+    - Que pelicula es tu favorita?
+    - Tienes alguna pelicula favorita?
+    - Te gusta alguna pelicula?
+    
+- intent: color
+  examples: |
+    - Cual es tu color favorito?
+    - Que color es tu favorito?
+    - Tienes algun color favorito?
+    - Te gusta algun color?
+
+- intent: dominio
+  examples: |
+    - Tienes pensando dominar el mundo?
+    - Piensas dominar el mundo?
+    - Vas a dominar el mundo?
+
+- intent: proposito
+  examples: |
+    - Cual es tu propósito?
+    - Tienes algun propósito?
+    - Dime tu propósito
+
+- intent: juego
+  examples: |
+    - Cual es tu juego favorito?
+    - Tienes algun juego favorito?
+    - Te gusta algun juego?
+    - Recominedas algun juego?
+
+- intent: vehiculo
+  examples: |
+    - Cual es tu vehiculo?
+    - Tienes algun vehiculo favorito?
+    - Te gusta algun vehiculo?
+    - Que vehiculo es tu favorito?
+
+
+- intent: musica
+  examples: |
+    - Cual es tu genero de musica favorito?
+    - Tienes algun genero de musica favorita?
+    - Te gusta algun genero de musica?
+    - Que genero de musica es tu favorito?
+
+- intent: deporte
+  examples: |
+    - Alguna vez hiciste algun deporte?
+    - Probaste practicar algun deporte?
+    - Te gusta algun deporte?
+
+- intent: sentir
+  examples: |
+    - Puedes sentir algo?
+    - Alguna vez sentiste algo?
+    - Sabes lo que es sentir?
+    - Sientes algo?
+
+- intent: otrobot
+  examples: |
+    - Conoces otro bot?
+    - Conociste algun otro bot?
+    - Has hablado con otro como tu?
+    - Hablaste con otro bot?
+
+- intent: familia
+  examples: |
+    - Tienes algun familiar?
+    - Conoces a tu familia?
+    - Sabes si tienes familia?
+
+- intent: cancion
+  examples: |
+    - Cual es tu canción favorita?
+    - Tienes alguna canción favorita?
+    - Te gusta alguna canción?
+    - Que canción es tu favorita?
+
+- intent: aprender
+  examples: |
+    - Aprender palabra
