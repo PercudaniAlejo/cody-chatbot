@@ -3,7 +3,7 @@ $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
 	if (keyCode === 13) {
-		if (text == "" || $.trim(text) == '') {
+		if (text == "" || $.trim(text) == '') {//trim elimina espacios demas
 			e.preventDefault();
 			return false;
 		} else {
@@ -46,7 +46,7 @@ function send(message) {
 		}),
 		success: function (data, textStatus) {
 			if(data != null){
-					setBotResponse(data);
+					setBotResponse( data);
 			}
 			console.log("Rasa Response: ", data, "\n Status:", textStatus)
 		},
@@ -113,26 +113,26 @@ $('#close').click(function () {
 
 // ------------------------------------------ Suggestions -----------------------------------------------
 
-function addSuggestion(textToAdd) {
-	setTimeout(function () {
-		var suggestions = textToAdd;
-		var suggLength = textToAdd.length;
-		$(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></diV>').appendTo('.chats').hide().fadeIn(1000);
-		// Loop through suggestions
-		for (i = 0; i < suggLength; i++) {
-			$('<div class="menuChips" data-payload=\''+(suggestions[i].payload)+'\'>' + suggestions[i].title + "</div>").appendTo(".menu");
-		}
-		scrollToBottomOfResults();
-	}, 1000);
-}
+// function addSuggestion(textToAdd) {
+// 	setTimeout(function () {
+// 		var suggestions = textToAdd;
+// 		var suggLength = textToAdd.length;
+// 		$(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></diV>').appendTo('.chats').hide().fadeIn(1000);
+// 		// Loop through suggestions
+// 		for (i = 0; i < suggLength; i++) {
+// 			$('<div class="menuChips" data-payload=\''+(suggestions[i].payload)+'\'>' + suggestions[i].title + "</div>").appendTo(".menu");
+// 		}
+// 		scrollToBottomOfResults();
+// 	}, 1000);
+// }
 
 
-// on click of suggestions, get the value and send to rasa
-$(document).on("click", ".menu .menuChips", function () {
-	var text = this.innerText;
-	var payload= this.getAttribute('data-payload');
-	console.log("button payload: ",this.getAttribute('data-payload'))
-	setUserResponse(text);
-	send(payload);
-	$('.suggestions').remove(); //delete the suggestions 
-});
+// // on click of suggestions, get the value and send to rasa
+// $(document).on("click", ".menu .menuChips", function () {
+// 	var text = this.innerText;
+// 	var payload= this.getAttribute('data-payload');
+// 	console.log("button payload: ",this.getAttribute('data-payload'))
+// 	setUserResponse(text);
+// 	send(payload);
+// 	$('.suggestions').remove(); //delete the suggestions 
+// });
