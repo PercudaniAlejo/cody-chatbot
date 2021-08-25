@@ -1,0 +1,126 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: ask color
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: color
+  - action: utter_color
+
+- story: ask food
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: food
+  - action: utter_food
+
+- story: ask movie
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: movie
+  - action: utter_movie
+   
+- story: dominio
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: dominio
+  - action: utter_dominio
+
+- story: proposito
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: proposito
+  - action: utter_proposito
+
+- story: juego
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: juego
+  - action: utter_juego
+
+- story: vehiculo
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: vehiculo
+  - action: utter_car
+
+- story: musica
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: musica
+  - action: utter_musica
+
+- story: cancion
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: cancion
+  - action: utter_cancion
+
+- story: deporte
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deporte
+  - action: utter_deporte
+
+- story: sentir
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: sentir
+  - action: utter_sentir
+
+- story: otrobot
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: otrobot
+  - action: utter_otrobot
+
+- story: familia
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: familia
+  - action: utter_familia
+
+- story: aprender
+  steps:
+  - intent: aprender 
+  - action: action_aprender
