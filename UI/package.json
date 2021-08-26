@@ -1,8 +1,9 @@
 {
-  "name": "UI",
+  "name": "prueba-de-db",
   "version": "1.0.0",
-  "description": "A Chat widget easy to connect to RASA bot to Custom Channel(a webpage).",
+  "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
