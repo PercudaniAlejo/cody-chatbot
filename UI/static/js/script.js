@@ -1,3 +1,4 @@
+import axios from 'axios'
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -15,11 +16,8 @@ $('.usrInput').on('keyup keypress', function (e) {
 	}
 });
 
-
-//------------------------------------- Set user response------------------------------------
+// Mostrar respuesta de usuario
 function setUserResponse(val) {
-	
-	
 	var UserResponse = '<img class="userAvatar" src=' + "./static/img/userAvatar.jpg" + '><p class="userMsg">' + val + ' </p><div class="clearfix"></div>';
 	$(UserResponse).appendTo('.chats').show('slow');
 	$(".usrInput").val('');
@@ -27,7 +25,7 @@ function setUserResponse(val) {
 	$('.suggestions').remove();
 }
 
-//---------------------------------- Scroll to the bottom of the chats-------------------------------
+// Scroll automático en el chat
 function scrollToBottomOfResults() {
 	var terminalResultsDiv = document.getElementById('chats');
 	terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
@@ -35,8 +33,7 @@ function scrollToBottomOfResults() {
 
 function send(message) {
 	console.log("User Message:", message)
-	const messageQuery = require("./db/db.js")
-	messageQuery.queryDB(message);
+	newIntent(message)
 	$.ajax({
 		url: 'http://localhost:5005/webhooks/rest/webhook',
 		type: 'POST',
@@ -54,15 +51,26 @@ function send(message) {
 		error: function (errorMessage) {
 			setBotResponse("");
 			console.log('Error' + errorMessage);
-
 		}
 	});
 }
 
-//------------------------------------ Set bot response -------------------------------------
+function newIntent(message) {
+	axios.post('http://localhost:8080/', {
+		message: message	
+	})
+	.then((response) => {
+		console.log(response);
+	  }, (error) => {
+		console.log(error);
+	  });
+}
+
+// Mostrar respuesta del bot
 function setBotResponse(val) {
 	setTimeout(function () {
 		if (val.length < 1) {
+
 			//if there is no response from Rasa
 			msg = 'I couldn\'t get that. Let\' try something else!';
 
@@ -98,7 +106,7 @@ function setBotResponse(val) {
 	}, 500);
 }
 
-// ------------------------------------------ Toggle chatbot -----------------------------------------------
+// Minimizar Maximizar chat (borrar)
 $('#profile_div').click(function () {
 	$('.profile_div').toggle();
 	$('.widget').toggle();
@@ -109,30 +117,3 @@ $('#close').click(function () {
 	$('.profile_div').toggle();
 	$('.widget').toggle();
 });
-
-
-// ------------------------------------------ Suggestions -----------------------------------------------
-
-// function addSuggestion(textToAdd) {
-// 	setTimeout(function () {
-// 		var suggestions = textToAdd;
-// 		var suggLength = textToAdd.length;
-// 		$(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></diV>').appendTo('.chats').hide().fadeIn(1000);
-// 		// Loop through suggestions
-// 		for (i = 0; i < suggLength; i++) {
-// 			$('<div class="menuChips" data-payload=\''+(suggestions[i].payload)+'\'>' + suggestions[i].title + "</div>").appendTo(".menu");
-// 		}
-// 		scrollToBottomOfResults();
-// 	}, 1000);
-// }
-
-
-// // on click of suggestions, get the value and send to rasa
-// $(document).on("click", ".menu .menuChips", function () {
-// 	var text = this.innerText;
-// 	var payload= this.getAttribute('data-payload');
-// 	console.log("button payload: ",this.getAttribute('data-payload'))
-// 	setUserResponse(text);
-// 	send(payload);
-// 	$('.suggestions').remove(); //delete the suggestions 
-// });
