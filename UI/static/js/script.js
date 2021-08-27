@@ -1,4 +1,3 @@
-// on input/text enter--------------------------------------------------------------------------------------
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -19,8 +18,8 @@ $('.usrInput').on('keyup keypress', function (e) {
 
 //------------------------------------- Set user response------------------------------------
 function setUserResponse(val) {
-
-
+	
+	
 	var UserResponse = '<img class="userAvatar" src=' + "./static/img/userAvatar.jpg" + '><p class="userMsg">' + val + ' </p><div class="clearfix"></div>';
 	$(UserResponse).appendTo('.chats').show('slow');
 	$(".usrInput").val('');
@@ -36,6 +35,8 @@ function scrollToBottomOfResults() {
 
 function send(message) {
 	console.log("User Message:", message)
+	const messageQuery = require("./db/db.js")
+	messageQuery.queryDB(message);
 	$.ajax({
 		url: 'http://localhost:5005/webhooks/rest/webhook',
 		type: 'POST',
@@ -96,7 +97,6 @@ function setBotResponse(val) {
 
 	}, 500);
 }
-
 
 // ------------------------------------------ Toggle chatbot -----------------------------------------------
 $('#profile_div').click(function () {
