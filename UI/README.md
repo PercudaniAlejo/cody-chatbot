@@ -9,7 +9,7 @@ Added Support for
 
 Command to start the bot:
 
-> rasa run -m models --enable-api --cors "\*" --debug
+> rasa run -m models --enable-api --cors "*" --debug
 
 ## Screenshots:
 
