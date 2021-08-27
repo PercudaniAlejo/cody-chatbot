@@ -136,3 +136,49 @@ $('#close').click(function () {
 // 	send(payload);
 // 	$('.suggestions').remove(); //delete the suggestions 
 // });
+//------------------------------------------------------------------------------------------------------
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  
+  function success(pos) {
+    var crd = pos.coords;
+  
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+	var lat = crd.latitude;
+	var lon = crd.longitude;
+  };
+  
+  function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  };
+  
+  navigator.geolocation.getCurrentPosition(success, error, options);
+//------------------------------------------------
+
+// esta deberia ser la forma en la cual declaras tu objeto datos para que la pueda parsear a Json
+var list = {
+  'datos' :[]
+};
+
+//guardas los datos
+for (var i = 0; i < arrayNombres.length; i++) {
+
+    list.datos.push({
+    text,
+    lat,
+	lon
+  });
+};
+
+json = JSON.stringify(list); // aqui tienes la lista de objetos en Json
+var obj = JSON.parse(json); //Parsea el Json al objeto anterior.
+
+$("#res").text('' + json);
+//-------------------------------------------------
+
