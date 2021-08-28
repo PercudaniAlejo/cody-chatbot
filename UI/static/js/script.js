@@ -1,4 +1,4 @@
-import axios from 'axios'
+fetch('http://localhost:8080/respuesta').then(x => x.json()).then(console.log)
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -56,14 +56,12 @@ function send(message) {
 }
 
 function newIntent(message) {
-	axios.post('http://localhost:8080/', {
-		message: message	
+	fetch('http://localhost:8080/respuesta', {
+		method: 'POST',
+		body: JSON.stringify({
+			"message": message,
+		}),
 	})
-	.then((response) => {
-		console.log(response);
-	  }, (error) => {
-		console.log(error);
-	  });
 }
 
 // Mostrar respuesta del bot
