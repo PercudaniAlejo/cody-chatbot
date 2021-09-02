@@ -1,4 +1,3 @@
-fetch('http://localhost:8080/respuesta').then(x => x.json()).then(console.log)
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -25,14 +24,14 @@ function setUserResponse(val) {
 	$('.suggestions').remove();
 }
 
-// Scroll automático en el chat
+// Scroll automÃ¡tico en el chat
 function scrollToBottomOfResults() {
 	var terminalResultsDiv = document.getElementById('chats');
 	terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
 }
 
 function send(message) {
-	console.log("User Message:", message)
+	console.log("Mensaje de usuario:", message)
 	newIntent(message)
 	$.ajax({
 		url: 'http://localhost:5005/webhooks/rest/webhook',
@@ -47,10 +46,6 @@ function send(message) {
 					setBotResponse( data);
 			}
 			console.log("Rasa Response: ", data, "\n Status:", textStatus)
-		},
-		error: function (errorMessage) {
-			setBotResponse("");
-			console.log('Error' + errorMessage);
 		}
 	});
 }
@@ -61,13 +56,18 @@ function newIntent(message) {
 		body: JSON.stringify({
 			"message": message,
 		}),
-	})
+	}).then
+	fetch('http://localhost:8080/respuesta')
+  		.then(response => response.text())
+  		.then(data => console.log(data));
 }
+
+
 
 // Mostrar respuesta del bot
 function setBotResponse(val) {
 	setTimeout(function () {
-		if (val.length < 1) {
+		if (val.length < 1) { // BAJAR TOLERANCIA
 
 			//if there is no response from Rasa
 			msg = 'I couldn\'t get that. Let\' try something else!';

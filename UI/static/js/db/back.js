@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 8080
+const fs = require('fs')
 //#region
 app.use(
   express.urlencoded({
@@ -25,20 +26,32 @@ if (conn)
 //#endregion
 
 let intent = ""
-app.get('/respuesta', (req, res) => {
-  res.send(intent)
+const CreateLine = fs.createWriteStream('../../../../data/nlu.yml', {
+  flags: 'a' //flags: 'a' guarda la información antigua del archivo
 })
 
-
+app.get('/respuesta', (req, res) => {
+  res.send(intent)
+  fs.readFile('../../../../data/nlu.yml', function(err, data){
+    if(err)
+        return console.log(err)
+    const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+    for(let i of arr){
+        console.log(i)
+    }
+    CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
+    CreateLine.write("     examples: | " + '\r\n')
+  })
+})
 
 
 var query = ""
 app.post('/respuesta', (req, res) => {
-  console.log("Hicieron un post")
   res.send(JSON.stringify("Guardado"))
   console.log(req.body)
   // res.send(JSON.stringify(req.body))
   var message = req.body.message
+  // message = "programacion"
   query = "SELECT *, MATCH(title, body) AGAINST('"+message+"') as rank FROM articulos WHERE MATCH(title, body) AGAINST('"+message+"') ORDER BY rank DESC"
   conn.query(query, (err, rows) => {
     if(err) throw err
