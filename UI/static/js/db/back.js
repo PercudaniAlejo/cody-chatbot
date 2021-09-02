@@ -29,12 +29,15 @@ app.get('/respuesta', (req, res) => {
   res.send(intent)
 })
 
-
-
+app.get('/respuesta', (req, res))
+{
+  console.log("hicieorn un get")
+}
 
 var query = ""
 app.post('/respuesta', (req, res) => {
   console.log("Hicieron un post")
+
   res.send(JSON.stringify("Guardado"))
   console.log(req.body)
   // res.send(JSON.stringify(req.body))
@@ -54,11 +57,7 @@ app.post('/respuesta', (req, res) => {
     console.log("Titulo del resultado: " + titleMayor)
     intent = titleMayor
   });
-  // conn.query('SELECT * FROM articulos', (err, rows) => {
-  //   if(err) throw err
-  //   console.log('Datos de la tabla: ')
-  //   console.log(rows)
-  //   });
+
 })
 
 app.listen(port)
