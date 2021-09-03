@@ -36,14 +36,13 @@ app.get('/respuesta', (req, res) => {
     if(err)
         return console.log(err)
     const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
-    for(let i of arr){
-        console.log(i)
-    }
+      for(let i of arr){
+          console.log(i)
+      }
     CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
     CreateLine.write("     examples: | " + '\r\n')
   })
 })
-
 
 var query = ""
 app.post('/respuesta', (req, res) => {

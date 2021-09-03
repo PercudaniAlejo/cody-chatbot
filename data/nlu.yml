@@ -176,5 +176,11 @@ nlu:
     examples: |
       - Aprender palabra
 
-    - intent: 
-      examples: | 
+  - intent: Lenguajes de programacion
+     examples: | 
+
+  - intent: Lenguajes de programacion
+     examples: | 
+
+  - intent: Lenguajes de programacion
+     examples: | 

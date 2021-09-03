@@ -32,7 +32,7 @@ function scrollToBottomOfResults() {
 
 function send(message) {
 	console.log("Mensaje de usuario:", message)
-	newIntent(message)
+
 	$.ajax({
 		url: 'http://localhost:5005/webhooks/rest/webhook',
 		type: 'POST',
@@ -43,7 +43,8 @@ function send(message) {
 		}),
 		success: function (data, textStatus) {
 			if(data != null){
-					setBotResponse( data);
+				setBotResponse( data, message);
+
 			}
 			console.log("Rasa Response: ", data, "\n Status:", textStatus)
 		}
@@ -56,24 +57,22 @@ function newIntent(message) {
 		body: JSON.stringify({
 			"message": message,
 		}),
-	}).then
-	fetch('http://localhost:8080/respuesta')
-  		.then(response => response.text())
-  		.then(data => console.log(data));
+	})
 }
 
-
-
 // Mostrar respuesta del bot
-function setBotResponse(val) {
+function setBotResponse(val, message) {
+	console.log("asdasd: " + message)
 	setTimeout(function () {
 		if (val.length < 1) { // BAJAR TOLERANCIA
 
-			//if there is no response from Rasa
 			msg = 'I couldn\'t get that. Let\' try something else!';
-
 			var BotResponse = '<img class="botAvatar" src="./static/img/botAvatar.png"><p class="botMsg">' + msg + '</p><div class="clearfix"></div>';
 			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
+			newIntent(message)
+			fetch('http://localhost:8080/respuesta')
+				  .then(response => response.text())
+				  .then(data => console.log(data));
 
 		} else {
 			//if we get response from Rasa
