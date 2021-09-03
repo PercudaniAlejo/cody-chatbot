@@ -4,18 +4,17 @@ const mysql = require('mysql');
 require('dotenv').config();
 
 function connectionDB(){
-const connection = mysql.createConnection({
-    // host: process.env.DB_HOST,
-    // user: process.env.DB_USER,
-    // password: process.env.DB_PASSWORD,
-    // database: process.env.DB_DATABASE
-    host: 'localhost',
-    user: 'root',
-    database: 'cody_fulltext'
-});
-return connection
+    const connection = mysql.createConnection({
+        // host: process.env.DB_HOST,
+        // user: process.env.DB_USER,
+        // password: process.env.DB_PASSWORD,
+        // database: process.env.DB_DATABASE
+        host: 'localhost',
+        user: 'root',
+        database: 'cody_fulltext'
+    });
+    return connection
 }
-
 
 // function QueryMessage ()
 // {
@@ -46,6 +45,7 @@ return connection
 // }
 
 module.exports = {
-    // "queryDB": QueryMessage,
+  // "queryDB": QueryMessage,
     "connectionDB": connectionDB
 }
+
