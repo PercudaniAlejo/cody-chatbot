@@ -66,11 +66,7 @@ app.post('/respuesta', (req, res) => {
     console.log("Titulo del resultado: " + titleMayor)
     intent = titleMayor
   });
-  // conn.query('SELECT * FROM articulos', (err, rows) => {
-  //   if(err) throw err
-  //   console.log('Datos de la tabla: ')
-  //   console.log(rows)
-  //   });
+
 })
 
 app.listen(port)
