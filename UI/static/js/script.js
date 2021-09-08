@@ -1,3 +1,4 @@
+const arrMsgUsers = [];	
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -6,9 +7,13 @@ $('.usrInput').on('keyup keypress', function (e) {
 			e.preventDefault();
 			return false;
 		} else {
+			console.log("Modo sabido")
 			$(".usrInput").blur();
-			setUserResponse(text);
-			send(text);
+			arrMsgUsers.push(text)
+			var ultimoMsj = arrMsgUsers[arrMsgUsers.length - 1];
+			console.log("Ultimo: "  + ultimoMsj)
+			setUserResponse(ultimoMsj);
+			send(ultimoMsj);
 			e.preventDefault();
 			return false;
 		}
@@ -52,6 +57,7 @@ function send(message) {
 }
 
 function newIntent(message) {
+	console.log("mensaje a enviar a la api: " + message)
 	fetch('http://localhost:8080/respuesta', {
 		method: 'POST',
 		body: JSON.stringify({
@@ -60,19 +66,21 @@ function newIntent(message) {
 	})
 }
 
-// Mostrar respuesta del bot
+	// Mostrar respuesta del bot
 function setBotResponse(val, message) {
-	console.log("asdasd: " + message)
+	console.log(val)
 	setTimeout(function () {
-		if (val.length < 1) { // BAJAR TOLERANCIA
+		if (val.length < 1) {
 
 			msg = 'I couldn\'t get that. Let\' try something else!';
+
 			var BotResponse = '<img class="botAvatar" src="./static/img/botAvatar.png"><p class="botMsg">' + msg + '</p><div class="clearfix"></div>';
 			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
-			newIntent(message)
-			fetch('http://localhost:8080/respuesta')
-				  .then(response => response.text())
-				  .then(data => console.log(data));
+			
+			newIntent(message);
+			// fetch('http://localhost:8080/respuesta')
+			// 	  .then(response => response.text())
+			// 	  .then(data => console.log(data));
 
 		} else {
 			//if we get response from Rasa

@@ -176,11 +176,5 @@ nlu:
     examples: |
       - Aprender palabra
 
-  - intent: Lenguajes de programacion
-     examples: | 
-
-  - intent: Lenguajes de programacion
-     examples: | 
-
-  - intent: Lenguajes de programacion
+  - intent: Hitler
      examples: | 

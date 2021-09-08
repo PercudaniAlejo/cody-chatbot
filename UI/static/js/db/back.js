@@ -25,24 +25,24 @@ if (conn)
   console.log("Conectado")
 //#endregion
 
-let intent = ""
 const CreateLine = fs.createWriteStream('../../../../data/nlu.yml', {
   flags: 'a' //flags: 'a' guarda la información antigua del archivo
 })
-
-app.get('/respuesta', (req, res) => {
-  res.send(intent)
-  fs.readFile('../../../../data/nlu.yml', function(err, data){
-    if(err)
-        return console.log(err)
-    const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
-      for(let i of arr){
-          console.log(i)
-      }
-    CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
-    CreateLine.write("     examples: | " + '\r\n')
-  })
-})
+var intent
+// app.get('/respuesta', (req, res) => {
+//   var intent = req.body
+//   res.send(intent)
+//   fs.readFile('../../../../data/nlu.yml', function(err, data){
+//     if(err)
+//         return console.log(err)
+//     const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+//       for(let i of arr){
+//           console.log(i)
+//       }
+//     CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
+//     CreateLine.write("     examples: | " + '\r\n')
+//   })
+// })
 
 var query = ""
 app.post('/respuesta', (req, res) => {
@@ -65,8 +65,18 @@ app.post('/respuesta', (req, res) => {
     console.log("Rango de coincidencia: " + rankMayor)
     console.log("Titulo del resultado: " + titleMayor)
     intent = titleMayor
-  });
 
+    fs.readFile('../../../../data/nlu.yml', function(err, data){
+      if(err)
+          return console.log(err)
+      const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+        for(let i of arr){
+            console.log(i)
+        }
+      CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
+      CreateLine.write("     examples: | " + '\r\n')
+    })
+  });
 })
 
 app.listen(port)
