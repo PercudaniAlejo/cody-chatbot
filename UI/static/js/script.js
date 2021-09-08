@@ -78,9 +78,6 @@ function setBotResponse(val, message) {
 			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
 			
 			newIntent(message);
-			// fetch('http://localhost:8080/respuesta')
-			// 	  .then(response => response.text())
-			// 	  .then(data => console.log(data));
 
 		} else {
 			//if we get response from Rasa
