@@ -1,4 +1,5 @@
 const arrMsgUsers = [];	
+let comprobarMensaje= true
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -7,15 +8,28 @@ $('.usrInput').on('keyup keypress', function (e) {
 			e.preventDefault();
 			return false;
 		} else {
-			console.log("Modo sabido")
+			if(comprobarMensaje){
+
+				console.log("Modo sabido")
+				$(".usrInput").blur();
+				arrMsgUsers.push(text)
+				var ultimoMsj = arrMsgUsers[arrMsgUsers.length - 1];
+				console.log("Ultimo: "  + ultimoMsj)
+				setUserResponse(ultimoMsj);
+				send(ultimoMsj);
+				e.preventDefault();
+				return false;
+			}else{/// Entra solo cuando no entiende, aca le enseñamos
+			console.log("algo")
 			$(".usrInput").blur();
 			arrMsgUsers.push(text)
 			var ultimoMsj = arrMsgUsers[arrMsgUsers.length - 1];
 			console.log("Ultimo: "  + ultimoMsj)
 			setUserResponse(ultimoMsj);
-			send(ultimoMsj);
-			e.preventDefault();
+			Aprender(ultimoMsj);
+			comprobarMensaje=true;
 			return false;
+			}
 		}
 	}
 });
@@ -65,7 +79,7 @@ function newIntent(message) {
 		}),
 	})
 }
-// .
+
 	// Mostrar respuesta del bot
 function setBotResponse(val, message) {
 	console.log(val)
@@ -78,7 +92,7 @@ function setBotResponse(val, message) {
 			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
 			
 			newIntent(message);
-
+			comprobarMensaje=false;
 		} else {
 			//if we get response from Rasa
 			for (i = 0; i < val.length; i++) {
@@ -119,3 +133,11 @@ $('#close').click(function () {
 	$('.profile_div').toggle();
 	$('.widget').toggle();
 });
+function Aprender(message){
+    fetch('http://localhost:8080/nueva-respuesta', {
+        method: 'POST',
+        body: JSON.stringify({
+            "message": message,
+        }),
+    })
+}

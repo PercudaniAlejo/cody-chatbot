@@ -4,6 +4,8 @@ const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 8080
 const fs = require('fs')
+var aux;
+let comprobarIntent=true;
 //#region
 app.use(
   express.urlencoded({
@@ -70,14 +72,38 @@ app.post('/respuesta', (req, res) => {
       if(err)
           return console.log(err)
       const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+      aux="  - intent: " + intent;
         for(let i of arr){
-            console.log(i)
-        }
-      CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
-      CreateLine.write("     examples: | " + '\r\n')
+            if(i==aux){
+             comprobarIntent=false;
+             break;
+            }
+          }
+        if(comprobarIntent){
+          CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
+          CreateLine.write("     examples: | " + '\r\n')
+        }else{
+          comprobarIntent=true;
+        }    
     })
   });
 })
+
+app.post('/nueva-respuesta',(req,res)=>{
+  var message = req.body.message
+  aux="  - intent: " + intent;
+  fs.readFile('../../../../data/nlu.yml', function(err, data){
+    if(err)
+        return console.log(err)
+    const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+      for(let i of arr){
+        if(i==aux){
+          CreateLine.write("      - "+message+"\n") 
+        }
+      }
+  })
+});
+
 
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)
