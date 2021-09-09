@@ -4,7 +4,7 @@
   bottom: 5%;
   background: #f6f6f6;
   border-radius: 10px 10px 10px 10px;
-  box-shadow: 0px 2px 10px 1px #b5b5b5;
+  box-shadow: 0px 4px 8px 3px #b5b5b5;
   width: 60%;
   transform: translateX(40%);
 }
@@ -211,4 +211,14 @@ video:focus {
   align-items: center;
   float: left;
   margin-right: 10px;
+}
+
+@media (max-width: 574px) {
+  .container {
+    width: 100% !important;
+  }
+  .chat {
+    width: 100%;
+    transform: translateX(0%);
+  }
 }
