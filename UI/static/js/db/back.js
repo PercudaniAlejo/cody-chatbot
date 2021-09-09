@@ -25,7 +25,7 @@ if (conn)
   console.log("Conectado")
 //#endregion
 
-const CreateLine = fs.createWriteStream('/../../data/nlu.yml', {
+const CreateLine = fs.createWriteStream('../../../../data/nlu.yml', {
   flags: 'a' //flags: 'a' guarda la información antigua del archivo
 })
 var intent
