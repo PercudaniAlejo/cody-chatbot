@@ -65,7 +65,7 @@ function newIntent(message) {
 		}),
 	})
 }
-
+// .
 	// Mostrar respuesta del bot
 function setBotResponse(val, message) {
 	console.log(val)
