@@ -1,3 +1,5 @@
+const arrMsgUsers = [];	
+let comprobarMensaje= true
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
@@ -6,11 +8,28 @@ $('.usrInput').on('keyup keypress', function (e) {
 			e.preventDefault();
 			return false;
 		} else {
+			if(comprobarMensaje){
+
+				console.log("Modo sabido")
+				$(".usrInput").blur();
+				arrMsgUsers.push(text)
+				var ultimoMsj = arrMsgUsers[arrMsgUsers.length - 1];
+				console.log("Ultimo: "  + ultimoMsj)
+				setUserResponse(ultimoMsj);
+				send(ultimoMsj);
+				e.preventDefault();
+				return false;
+			}else{/// Entra solo cuando no entiende, aca le enseñamos
+			console.log("algo")
 			$(".usrInput").blur();
-			setUserResponse(text);
-			send(text);
-			e.preventDefault();
+			arrMsgUsers.push(text)
+			var ultimoMsj = arrMsgUsers[arrMsgUsers.length - 1];
+			console.log("Ultimo: "  + ultimoMsj)
+			setUserResponse(ultimoMsj);
+			Aprender(ultimoMsj);
+			comprobarMensaje=true;
 			return false;
+			}
 		}
 	}
 });
@@ -52,6 +71,7 @@ function send(message) {
 }
 
 function newIntent(message) {
+	console.log("mensaje a enviar a la api: " + message)
 	fetch('http://localhost:8080/respuesta', {
 		method: 'POST',
 		body: JSON.stringify({
@@ -60,20 +80,19 @@ function newIntent(message) {
 	})
 }
 
-// Mostrar respuesta del bot
+	// Mostrar respuesta del bot
 function setBotResponse(val, message) {
-	console.log("asdasd: " + message)
+	console.log(val)
 	setTimeout(function () {
-		if (val.length < 1) { // BAJAR TOLERANCIA
+		if (val.length < 1) {
 
 			msg = 'I couldn\'t get that. Let\' try something else!';
+
 			var BotResponse = '<img class="botAvatar" src="./static/img/botAvatar.png"><p class="botMsg">' + msg + '</p><div class="clearfix"></div>';
 			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
-			newIntent(message)
-			fetch('http://localhost:8080/respuesta')
-				  .then(response => response.text())
-				  .then(data => console.log(data));
-
+			
+			newIntent(message);
+			comprobarMensaje=false;
 		} else {
 			//if we get response from Rasa
 			for (i = 0; i < val.length; i++) {
@@ -114,3 +133,11 @@ $('#close').click(function () {
 	$('.profile_div').toggle();
 	$('.widget').toggle();
 });
+function Aprender(message){
+    fetch('http://localhost:8080/nueva-respuesta', {
+        method: 'POST',
+        body: JSON.stringify({
+            "message": message,
+        }),
+    })
+}

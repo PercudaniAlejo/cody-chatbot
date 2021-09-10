@@ -172,15 +172,12 @@ nlu:
       - Te gusta alguna canción?
       - Que canción es tu favorita?
 
-  - intent: aprender
-    examples: |
-      - Aprender palabra
 
-  - intent: Lenguajes de programacion
+  - intent: Lenguajes Programacion
      examples: | 
+      - c#
 
-  - intent: Lenguajes de programacion
+  - intent: Hitler
      examples: | 
-
-  - intent: Lenguajes de programacion
-     examples: | 
+      - ANASHEEEE
+      - dios de la programacion
