@@ -18,3 +18,6 @@ while "next_page_token" in results:
      coffee_shops.extend(results['results'])
      print(results['results'])
      time.sleep(2)
+url = "localhost:5005/apiansw"
+x = requests.post(url, data=results)
+print(x)
