@@ -25,31 +25,15 @@ app.use(cors());
 //   console.log("Conectado")
 // //#endregion
 
-let intent = ""
-const CreateLine = fs.createWriteStream('../../../../data/nlu.yml', {
-  flags: 'a' //flags: 'a' guarda la información antigua del archivo
+app.get('/apiansw', (req, res) => {
+  console.log("HICIERON UN GET")
 })
 
-app.get('/respuesta', (req, res) => {
-  res.send(intent)
-  fs.readFile('../../../../data/nlu.yml', function(err, data){
-    if(err)
-        return console.log(err)
-    const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
-      for(let i of arr){
-          console.log(i)
-      }
-    CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
-    CreateLine.write("     examples: | " + '\r\n')
-  })
-})
 
-var query = ""
 app.post('/apiansw', (req, res) => {
-  res.send(JSON.stringify("Guardado"))
+  console.log("HICIERON UN POST")
   console.log(req.body)
   // res.send(JSON.stringify(req.body))
-  var message = req.body.message
   // message = "programacion"
 
   });
