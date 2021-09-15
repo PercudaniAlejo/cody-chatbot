@@ -72,7 +72,7 @@ function send(message) {
 
 function newIntent(message) {
 	console.log("mensaje a enviar a la api: " + message)
-	fetch('http://localhost:8080/respuesta', {
+	fetch('http://localhost:8080/intent', {
 		method: 'POST',
 		body: JSON.stringify({
 			"message": message,
@@ -134,7 +134,7 @@ $('#close').click(function () {
 	$('.widget').toggle();
 });
 function Aprender(message){
-    fetch('http://localhost:8080/nueva-respuesta', {
+    fetch('http://localhost:8080/nuevo-intent', {
         method: 'POST',
         body: JSON.stringify({
             "message": message,

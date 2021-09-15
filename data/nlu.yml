@@ -173,11 +173,15 @@ nlu:
       - Que canción es tu favorita?
 
 
+
   - intent: Lenguajes Programacion
      examples: | 
-      - c#
+      - aguante c++
+      - dios de la programacion
+
 
   - intent: Hitler
      examples: | 
-      - ANASHEEEE
-      - dios de la programacion
+      - polonia
+
+

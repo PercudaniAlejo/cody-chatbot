@@ -47,7 +47,7 @@ var intent
 // })
 
 var query = ""
-app.post('/respuesta', (req, res) => {
+app.post('/intent', (req, res) => {
   res.send(JSON.stringify("Guardado"))
   console.log(req.body)
   // res.send(JSON.stringify(req.body))
@@ -89,17 +89,23 @@ app.post('/respuesta', (req, res) => {
   });
 })
 
-app.post('/nueva-respuesta',(req,res)=>{
+app.post('/nuevo-intent',(req,res)=>{
   var message = req.body.message
   aux="  - intent: " + intent;
   fs.readFile('../../../../data/nlu.yml', function(err, data){
     if(err)
         return console.log(err)
     const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+    let escribirEn = arr.indexOf(aux) + 2
       for(let i of arr){
         if(i==aux){
-          CreateLine.write("      - "+message+"\n") 
+          arr.splice(escribirEn,0,"      - "+message);
+          //CreateLine.write("      - "+message+"\n") 
         }
+      }
+      let writer = fs.createWriteStream('../../../../data/nlu.yml')
+      for(let i of arr){
+          writer.write(i + '\n')
       }
   })
 });
@@ -107,3 +113,24 @@ app.post('/nueva-respuesta',(req,res)=>{
 
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)
+
+
+// const createLine = fs.createWriteStream('text.txt', {
+//     flags: 'a'
+// })
+// fs.readFile('text.txt', function(err, data){
+//     if(err)
+//         return console.log(err);
+//     const arr = data.toString().replace(/\r\n/g, '\n').split('\n');
+//     console.log(arr)
+//     let escribirEn = arr.indexOf(aux) + 2
+//     for(let i of arr){
+//         if (i == aux) {
+//             arr.splice(escribirEn,0,"nasdasdsd");
+//         }
+//     }
+//     let writer = fs.createWriteStream('text.txt')
+//     for(let i of arr){
+//         writer.write(i + '\n')
+//     }
+// });
