@@ -1,126 +1,131 @@
 version: "2.0"
 
 stories:
+  - story: Lenguajes de programacion
+    steps:
+      - intent: Lenguajes de programacion
+      - action: utter_Lenguajes de programacion
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
 
-- story: ask color
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: color
-  - action: utter_color
+  - story: ask color
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: color
+      - action: utter_color
 
-- story: ask food
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: food
-  - action: utter_food
+  - story: ask food
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: food
+      - action: utter_food
 
-- story: ask movie
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: movie
-  - action: utter_movie
-   
-- story: dominio
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: dominio
-  - action: utter_dominio
+  - story: ask movie
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: movie
+      - action: utter_movie
 
-- story: proposito
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: proposito
-  - action: utter_proposito
+  - story: dominio
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: dominio
+      - action: utter_dominio
 
-- story: juego
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: juego
-  - action: utter_juego
+  - story: proposito
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: proposito
+      - action: utter_proposito
 
-- story: vehiculo
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: vehiculo
-  - action: utter_car
+  - story: juego
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: juego
+      - action: utter_juego
 
-- story: musica
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: musica
-  - action: utter_musica
+  - story: vehiculo
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: vehiculo
+      - action: utter_car
 
-- story: cancion
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: cancion
-  - action: utter_cancion
+  - story: musica
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: musica
+      - action: utter_musica
 
-- story: deporte
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: deporte
-  - action: utter_deporte
+  - story: cancion
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: cancion
+      - action: utter_cancion
 
-- story: sentir
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: sentir
-  - action: utter_sentir
+  - story: deporte
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: deporte
+      - action: utter_deporte
 
-- story: otrobot
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: otrobot
-  - action: utter_otrobot
+  - story: sentir
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: sentir
+      - action: utter_sentir
 
-- story: familia
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: familia
-  - action: utter_familia
+  - story: otrobot
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: otrobot
+      - action: utter_otrobot
 
-- story: aprender
-  steps:
-  - intent: aprender 
-  - action: action_aprender
+  - story: familia
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: familia
+      - action: utter_familia
+
+  - story: aprender
+    steps:
+      - intent: aprender
+      - action: action_aprender
+

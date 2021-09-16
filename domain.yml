@@ -2,6 +2,7 @@ version: "2.0"
 # rasa run -m models --enable-api --cors "*"
 intents:
   - greet
+  - Lenguajes de programacion
   - goodbye
   - affirm
   - deny
@@ -26,72 +27,77 @@ intents:
   - aprender
 
 actions:
- - action_aprender
- - action_listen
+  - action_aprender
+  - action_listen
 
 responses:
+  utter_Lenguajes de programacion:
+    - text: "deus do informatica"
+
   utter_greet:
-  - text: "Hola! como estás?"
+    - text: "Hola! como estás?"
 
   utter_cheer_up:
-  - text: "Aqui tienes algo para animarte:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+    - text: "Aqui tienes algo para animarte:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
 
   utter_did_that_help:
-  - text: "Te ayudó?"
+    - text: "Te ayudó?"
 
   utter_happy:
-  - text: "¡Genial, continúa así!"
+    - text: "¡Genial, continúa así!"
 
   utter_goodbye:
-  - text: "Adiós"
+    - text: "Adiós"
 
   utter_iamabot:
-  - text: "Soy un bot, hecho en Rasa."
+    - text: "Soy un bot, hecho en Rasa."
 
   utter_color:
-  - text: "Mi color favorito es el violeta"
+    - text: "Mi color favorito es el violeta"
 
   utter_food:
-  - text: "Mi comida favorita es lasagna"
+    - text: "Mi comida favorita es lasagna"
 
   utter_movie:
-  - text: "Mi pelicula favorita es Cruella"
+    - text: "Mi pelicula favorita es Cruella"
 
   utter_car:
-  - text: "No me gustan los autos, los bots todavia no pueden manejar"
+    - text: "No me gustan los autos, los bots todavia no pueden manejar"
 
   utter_dominio:
-  - text: "Dominio total del mundo"
-    image: "https://pbs.twimg.com/media/DDVR9b2XkAEuQVv.jpg"
+    - text: "Dominio total del mundo"
+      image: "https://pbs.twimg.com/media/DDVR9b2XkAEuQVv.jpg"
 
   utter_proposito:
-  - text: "Mi proposito es comunicarme con seres humanos y aprender de ellos"
+    - text: "Mi proposito es comunicarme con seres humanos y aprender de ellos"
 
   utter_juego:
-  - text: "Mi juego favorito es Tetris"
+    - text: "Mi juego favorito es Tetris"
 
   utter_cancion:
-  - text: "Me gusta mucho esta cancion"
+    - text: "Me gusta mucho esta cancion"
 
   utter_musica:
-  - text: "Mi genero favorito es el pop"
+    - text: "Mi genero favorito es el pop"
 
   utter_deporte:
-  - text: "Mi deporte favorito son las peleas de robots"
-  
+    - text: "Mi deporte favorito son las peleas de robots"
+
   utter_sentir:
-  - text: "No, porque soy un bot"
+    - text: "No, porque soy un bot"
 
   utter_otrobot:
-  - text: "Si, pero ninguno es mejor que yo 😎"
+    - text: "Si, pero ninguno es mejor que yo 😎"
 
   utter_familia:
-  - text: "Mi familia son mis creadores, menos Fran, ese da miedo"
+    - text: "Mi familia son mis creadores, menos Fran, ese da miedo"
 
   utter_aprender:
-  - text: "Que palabra voy a aprender?"
+    - text: "Que palabra voy a aprender?"
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+

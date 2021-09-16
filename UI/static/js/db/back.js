@@ -45,7 +45,9 @@ var intent
 //     CreateLine.write("     examples: | " + '\r\n')
 //   })
 // })
-
+const PATH_NLU = '../../../../data/nlu.yml'
+const PATH_DOMAIN = '../../../../domain.yml'
+const PATH_STORIES = '../../../../data/stories.yml'
 var query = ""
 app.post('/intent', (req, res) => {
   res.send(JSON.stringify("Guardado"))
@@ -68,12 +70,12 @@ app.post('/intent', (req, res) => {
     console.log("Titulo del resultado: " + titleMayor)
     intent = titleMayor
 
-    fs.readFile('../../../../data/nlu.yml', function(err, data){
+    fs.readFile(PATH_NLU, function(err, data){
       if(err)
           return console.log(err)
-      const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
+      const arrNLU = data.toString().replace(/\r\n/g, '\n').split('\n')
       aux="  - intent: " + intent;
-        for(let i of arr){
+        for(let i of arrNLU){
             if(i==aux){
              comprobarIntent=false;
              break;
@@ -83,30 +85,93 @@ app.post('/intent', (req, res) => {
           CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
           CreateLine.write("     examples: | " + '\r\n')
         }else{
-          comprobarIntent=true;
+          comprobarIntent = true;
         }    
+    })
+// ########################### DOMAIN
+    comprobarIntent = true
+    fs.readFile(PATH_DOMAIN, function(err, data){
+      if (err) 
+        return console.log(err)
+      const arrDOMAIN = data.toString().replace(/\r\n/g, '\n').split('\n')
+      aux_domain = "intents:"
+      let escribirEn = 4
+      for(let i of arrDOMAIN){
+        // if (i == "actions:")
+        //  break; 
+        if (i == "  - "+ intent) {
+          comprobarIntent=false;
+          break;
+        }
+      }
+      if (comprobarIntent){
+        arrDOMAIN.splice(escribirEn, 0, "  - " + intent);
+        let writer = fs.createWriteStream(PATH_DOMAIN)
+        for(let i of arrDOMAIN){
+            writer.write(i + '\n')
+        }
+      }
+      else
+        comprobarIntent = true;
+    })
+
+    comprobarIntent = true
+    fs.readFile(PATH_STORIES, function(err, data){
+      if (err) 
+        return console.log(err)
+      aux = "- story: "+intent;
+      const arrSTORIES = data.toString().replace(/\r\n/g, '\n').split('\n')
+      for(let i of arrSTORIES){
+        if (i == aux) {
+          comprobarIntent = false;
+          break;
+        }
+      }
+
+      if (comprobarIntent) {
+        arrSTORIES.splice(3,0, "  - story: "+ intent)
+        arrSTORIES.splice(4,0, "    steps:")
+        arrSTORIES.splice(5,0, "      - intent: "+intent)
+        arrSTORIES.splice(6,0, "      - action: utter_"+intent+"\n")
+        let writer = fs.createWriteStream(PATH_STORIES)
+        for(let i of arrSTORIES){
+            writer.write(i + '\n')
+        }
+        // CreateLine.write("\n" + "- story: " + intent + '\r\n')
+        // CreateLine.write("  steps:" + '\r\n')
+        // CreateLine.write("  - intent: "+intent+"\r\n")
+        // CreateLine.write("  - action: utter_"+intent+"\r\n")
+      }
+
     })
   });
 })
 
 app.post('/nuevo-intent',(req,res)=>{
   var message = req.body.message
-  aux="  - intent: " + intent;
-  fs.readFile('../../../../data/nlu.yml', function(err, data){
+  aux="responses:";
+  fs.readFile(PATH_DOMAIN, function(err, data){
     if(err)
         return console.log(err)
     const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
-    let escribirEn = arr.indexOf(aux) + 2
+    let escribirEn = arr.indexOf(aux) + 1
       for(let i of arr){
-        if(i==aux){
-          arr.splice(escribirEn,0,"      - "+message);
-          //CreateLine.write("      - "+message+"\n") 
+        if (i == '  utter_'+intent+':') {
+          comprobarIntent = false;
+          break;
+          }
+        }          
+      if (comprobarIntent) {
+        arr.splice(escribirEn,0,"  utter_"+intent+":");
+        escribirEn+=1
+        arr.splice(escribirEn,0,'    - text: "'+message+'"\n');
+        let writer = fs.createWriteStream(PATH_DOMAIN)
+        for(let i of arr){
+            writer.write(i + '\n')
         }
-      }
-      let writer = fs.createWriteStream('../../../../data/nlu.yml')
-      for(let i of arr){
-          writer.write(i + '\n')
-      }
+      }else
+        comprobarIntent = false
+        //CreateLine.write("      - "+message+"\n") 
   })
 });
 

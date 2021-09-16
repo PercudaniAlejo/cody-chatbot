@@ -172,16 +172,5 @@ nlu:
       - Te gusta alguna canción?
       - Que canción es tu favorita?
 
-
-
-  - intent: Lenguajes Programacion
+  - intent: Lenguajes de programacion
      examples: | 
-      - aguante c++
-      - dios de la programacion
-
-
-  - intent: Hitler
-     examples: | 
-      - polonia
-
-
