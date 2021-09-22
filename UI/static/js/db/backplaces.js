@@ -31,5 +31,16 @@ app.post('/apiansw', (req, res) => {
   console.log(shops)
 });
 
+app.get('/location', (req, res) => {
+})
+
+app.post('/location', (req, res) => {
+  lat = req.body.latitude
+  lon = req.body.longitude
+  console.log("lat: " , lat)
+  console.log("lon: " , lon)
+})
+
+
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)

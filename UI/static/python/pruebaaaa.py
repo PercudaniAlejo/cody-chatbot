@@ -1,10 +1,12 @@
+from numpy.core.records import array
+from numpy.lib.shape_base import column_stack
 import requests
 import json
 import time
 shopSearch = []
 params = {}
 
-endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee+shop&location=35.7790905,-78.642413&radius=2000&region=us&type=cafe,bakery&key=AIzaSyD1qlq7FWZSpYjdpVdyWlDeVdEhFGhkaqk"
+endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee+shop&location=35.7790905,-78.642413&radius=500&region=us&type=cafe,bakery&key=AIzaSyD1qlq7FWZSpYjdpVdyWlDeVdEhFGhkaqk"
 api_url = "http://localhost:5005/apiansw"
 
 res = requests.get(endpoint_url, params=params)
@@ -38,13 +40,25 @@ for i in range(len(shopSearch)):
     except:
         shop_rating.append('none')
 
+# shops = {"shop_name": shop_name[1:5],
+#          "shop_address": shop_address[1:5], "shop_rating": shop_rating[1:5]}
 
-shops = {"shop_name": shop_name[0],
-         "shop_address": shop_address[0], "shop_rating": shop_rating[0]}
+data = [
+    {
+    "name": shop_name[0],
+    "address": shop_address[0],
+    "rating": shop_rating[0]
+    },
+    {
+    "name": shop_name[1],
+    "address": shop_address[1],
+    "rating": shop_rating[1]
+    }
+]
 
 try:
     print("\nEnviado")
-    requests.post(api_url, data=shops)
+    requests.post(api_url, json=data , timeout=5)
     # SE QUEDA TRABADO EN ESTE PROCESO. PERO ENVÍA LA INFORMACION
 except requests.exceptions.RequestException as e:
     raise SystemExit(e)
@@ -61,3 +75,30 @@ except requests.exceptions.RequestException as e:
     #         'shop_rating': shop_rating[i]
     #     }
     #     shops_top.append(r)
+
+
+
+
+
+# for i in range(len(shops)):
+#     aux = {
+#         "name": shop_name[i],
+#         "address": shop_address[i],
+#         "rating": shop_rating[i]    
+#     }
+#     arrShops.append(aux)
+     
+# filtro = []
+# for x in shop_rating:  
+#         if x >= 4:
+#              filtro.append(True)
+#         else: 
+#             filtro.append(False)
+# # print(filtro);
+# newArr = []
+# for i in filtro:
+#     newArr.append(i)
+
+# print(newArr)
+# shops = {"shop_name": shop_name[1:5],
+# "shop_address": shop_address[1:5], "shop_": newArr[1:5]}
