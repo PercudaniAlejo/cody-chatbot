@@ -61,15 +61,49 @@ app.post('/intent', (req, res) => {
     console.log("Búsqueda: " + message)
     let rankMayor = 0;
     let titleMayor = "";
+    let bodyMayor = "";
     for(var x in rows){
       if (rankMayor < rows[x].rank) 
         rankMayor = rows[x].rank;
-        titleMayor = rows[x].title;            
+        titleMayor = rows[x].title;    
+        bodyMayor=rows[x].body;        
       };
     console.log("Rango de coincidencia: " + rankMayor)
     console.log("Titulo del resultado: " + titleMayor)
+    bodyMayor = bodyMayor.toLowerCase();
+    let arrBody= bodyMayor.split(' ')
+    console.log(arrBody)
     intent = titleMayor
+    let arrPeso=[];
+    /*Vector con basura*/let arrBasura=["de","para","el","la","con","sí","si","sin","que","qué","como","cuando","donde","este","y","ya","durante","sobre","según","igual","por","o","u","se","tambien","más","los","además","aparte","asimismo","tanto","han","tampoco","es","al","fueron","fue","no","su","en","a","un","las","sus","ha","entre",];
+    let cont=0;
+    let auxpeso=0;
 
+  for(var x in arrBody){///eliminar basura
+    for (var y in arrBasura){
+      if(arrBody[x] == arrBasura[y]){
+        arrBody.splice(x, 1)
+      }
+    }
+  }
+  for(var x in arrBody){///calcular peso de cada palabra
+    for(var y in arrBody){
+      if(arrBody[x]==arrBody[y]){
+        cont++;
+      }
+    }
+  arrPeso.push(arrBody[x] + " " + cont);
+  cont=0;
+  }
+// console.log(arrBody);
+console.log(arrPeso);
+
+// var top10 = arrPeso.sort(function (a, b) { return b - a; }).slice(0, 10);
+// console.log(top10);
+
+
+
+//-----------------------------------------------------------------------------------
     fs.readFile(PATH_NLU, function(err, data){
       if(err)
           return console.log(err)
