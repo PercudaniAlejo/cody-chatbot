@@ -174,3 +174,6 @@ nlu:
 
   - intent: Lenguajes de programacion
      examples: | 
+
+  - intent: Lenguajes_de_programacion
+     examples: | 

@@ -2,6 +2,7 @@ version: "2.0"
 # rasa run -m models --enable-api --cors "*"
 intents:
   - greet
+  - Lenguajes_de_programacion
   - Lenguajes de programacion
   - goodbye
   - affirm
@@ -31,6 +32,12 @@ actions:
   - action_listen
 
 responses:
+  utter_Lenguajes_de_programacion:
+    - text: "programacion"
+
+  utter_undefined:
+    - text: "programacion"
+
   utter_Lenguajes de programacion:
     - text: "deus do informatica"
 
@@ -99,5 +106,8 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+
+
 
 

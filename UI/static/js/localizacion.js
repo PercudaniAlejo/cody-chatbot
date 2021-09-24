@@ -11,7 +11,7 @@ var options = {
     console.log('Latitude : ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
     console.log('More or less ' + crd.accuracy + ' meters.');
-    fetch('http://localhost:5005/location', {
+    fetch('http://localhost:5050/location', {
       method: 'POST',
       body: JSON.stringify({
         "latitude": crd.latitude,

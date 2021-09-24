@@ -21,7 +21,8 @@ app.use(cors());
 //#endregion
 
 //#region DB connection
-const connectionDB = require("./db")
+const connectionDB = require("./db");
+const { config } = require('dotenv');
 const conn = connectionDB.connectionDB();
 if (conn) 
   console.log("Conectado")
@@ -75,32 +76,51 @@ app.post('/intent', (req, res) => {
     console.log(arrBody)
     intent = titleMayor
     let arrPeso=[];
-    /*Vector con basura*/let arrBasura=["de","para","el","la","con","sí","si","sin","que","qué","como","cuando","donde","este","y","ya","durante","sobre","según","igual","por","o","u","se","tambien","más","los","además","aparte","asimismo","tanto","han","tampoco","es","al","fueron","fue","no","su","en","a","un","las","sus","ha","entre",];
+    /*Vector con basura*/let arrBasura=['de','para','el','la','con','sí','si','sin','que','qué','como','cuando','donde','este','y','ya','durante','sobre','según','igual','por','o','u','se','tambien','más','los','además','aparte','asimismo','tanto','han','tampoco','es','al','fueron','fue','no','su','en','a','un','las','sus','ha','entre'];
     let cont=0;
-    let auxpeso=0;
+    // let auxpeso=0;
 
+
+    // arrAux = ["lenguajes", "de", "programacion", "dios", "de", "la"]
+
+    // for(var x in arrAux){///eliminar basura
+    //     if(arrAux[x] == 'de'){
+    //       arrAux.splice(x, 1)
+    //     }
+    // }
+    // console.log(arrAux)
+var txt = []
+var sino =true
   for(var x in arrBody){///eliminar basura
     for (var y in arrBasura){
       if(arrBody[x] == arrBasura[y]){
-        arrBody.splice(x, 1)
+        sino = false;
+        break;
       }
+//        arrBody.splice(x, 1)     
     }
+    if(sino)
+       txt.push(arrBody[x])
+    sino = true
   }
+  console.log(txt)
+
   for(var x in arrBody){///calcular peso de cada palabra
     for(var y in arrBody){
       if(arrBody[x]==arrBody[y]){
         cont++;
       }
     }
-  arrPeso.push(arrBody[x] + " " + cont);
+  // arrPeso.push(arrBody[x]);
+  // arrPeso.push(cont);
   cont=0;
   }
-// console.log(arrBody);
-console.log(arrPeso);
+  console.log(arrBasura)
+console.log(arrBody);
+
 
 // var top10 = arrPeso.sort(function (a, b) { return b - a; }).slice(0, 10);
 // console.log(top10);
-
 
 
 //-----------------------------------------------------------------------------------
