@@ -3,7 +3,6 @@ version: "2.0"
 intents:
   - greet
   - Lenguajes_de_programacion
-  - Lenguajes de programacion
   - goodbye
   - affirm
   - deny
@@ -33,13 +32,7 @@ actions:
 
 responses:
   utter_Lenguajes_de_programacion:
-    - text: "programacion"
-
-  utter_undefined:
-    - text: "programacion"
-
-  utter_Lenguajes de programacion:
-    - text: "deus do informatica"
+    - text: "dios de la informatica"
 
   utter_greet:
     - text: "Hola! como estás?"
@@ -106,8 +99,5 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-
-
 
 

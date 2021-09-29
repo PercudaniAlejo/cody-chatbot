@@ -73,56 +73,60 @@ app.post('/intent', (req, res) => {
     console.log("Titulo del resultado: " + titleMayor)
     bodyMayor = bodyMayor.toLowerCase();
     let arrBody= bodyMayor.split(' ')
-    console.log(arrBody)
     intent = titleMayor
-    let arrPeso=[];
-    /*Vector con basura*/let arrBasura=['de','para','el','la','con','sí','si','sin','que','qué','como','cuando','donde','este','y','ya','durante','sobre','según','igual','por','o','u','se','tambien','más','los','además','aparte','asimismo','tanto','han','tampoco','es','al','fueron','fue','no','su','en','a','un','las','sus','ha','entre'];
+    let arrPeso = [];
+    /*Vector con basura*/let arrBasura=['lo', 'una', 'de','para','el','la','con','sí','si','sin','que','qué','como','cuando','donde','este','y','ya','durante','sobre','según','igual','por','o','u','se','tambien','más','los','además','aparte','asimismo','tanto','han','tampoco','es','al','fueron','fue','no','su','en','a','un','las','sus','ha','entre'];
     let cont=0;
-    // let auxpeso=0;
-
-
-    // arrAux = ["lenguajes", "de", "programacion", "dios", "de", "la"]
-
-    // for(var x in arrAux){///eliminar basura
-    //     if(arrAux[x] == 'de'){
-    //       arrAux.splice(x, 1)
-    //     }
-    // }
-    // console.log(arrAux)
-var txt = []
-var sino =true
+    let sino = true
+    let txt = []
   for(var x in arrBody){///eliminar basura
     for (var y in arrBasura){
       if(arrBody[x] == arrBasura[y]){
         sino = false;
         break;
       }
-//        arrBody.splice(x, 1)     
     }
     if(sino)
        txt.push(arrBody[x])
     sino = true
   }
   console.log(txt)
-
-  for(var x in arrBody){///calcular peso de cada palabra
-    for(var y in arrBody){
-      if(arrBody[x]==arrBody[y]){
-        cont++;
+  for(var x in txt){///calcular peso de cada palabra
+    for(var y in txt){
+      if(txt[x]==txt[y]){
+        cont++
       }
     }
-  // arrPeso.push(arrBody[x]);
-  // arrPeso.push(cont);
-  cont=0;
+    arrPeso.push(cont)
+  cont = 0;
   }
-  console.log(arrBasura)
-console.log(arrBody);
 
+  let dicPalabras = {}
+  for(var x in txt){
+      if (!dicPalabras[txt[x]]) {
+        dicPalabras[txt[x]] = 1        
+      }else{
+        dicPalabras[txt[x]] += 1
+    }
+  }
 
-// var top10 = arrPeso.sort(function (a, b) { return b - a; }).slice(0, 10);
-// console.log(top10);
+// Create items array
+  var itemsTop5 = Object.keys(dicPalabras).map(function(key) {
+    return [key,dicPalabras[key]]
+  });
+// Ordenar por cantidad de palabras
+itemsTop5.sort(function(first, second) {
+  return second[1] - first[1];
+});
 
+console.log(itemsTop5)
+itemsTop5 = itemsTop5.slice(0, 5)
+let arrSinonimos = []
+Object.values(itemsTop5).forEach(([key, value]) => {
+  arrSinonimos.push(key)
+})
 
+console.log(arrSinonimos)
 //-----------------------------------------------------------------------------------
     fs.readFile(PATH_NLU, function(err, data){
       if(err)
@@ -138,6 +142,10 @@ console.log(arrBody);
         if(comprobarIntent){
           CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
           CreateLine.write("     examples: | " + '\r\n')
+          for(let x in arrSinonimos)
+          {
+            CreateLine.write("      - " + arrSinonimos[x] + "\r\n")
+          }
         }else{
           comprobarIntent = true;
         }    
@@ -232,24 +240,3 @@ app.post('/nuevo-intent',(req,res)=>{
 
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)
-
-
-// const createLine = fs.createWriteStream('text.txt', {
-//     flags: 'a'
-// })
-// fs.readFile('text.txt', function(err, data){
-//     if(err)
-//         return console.log(err);
-//     const arr = data.toString().replace(/\r\n/g, '\n').split('\n');
-//     console.log(arr)
-//     let escribirEn = arr.indexOf(aux) + 2
-//     for(let i of arr){
-//         if (i == aux) {
-//             arr.splice(escribirEn,0,"nasdasdsd");
-//         }
-//     }
-//     let writer = fs.createWriteStream('text.txt')
-//     for(let i of arr){
-//         writer.write(i + '\n')
-//     }
-// });
