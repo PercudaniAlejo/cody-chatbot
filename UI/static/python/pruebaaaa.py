@@ -5,6 +5,10 @@ shopSearch = []
 params = {}
 
 res = requests.get('http://localhost:5050/location')
+resType = requests.get('http://localhost:5050/buscarLugar')
+typeLugar = resType.content
+typeLugar = typeLugar.decode('UTF-8')
+print(typeLugar)
 lat_lon = res.content
 lat_lon = lat_lon.decode('UTF-8')
 basura = "[]"
@@ -16,9 +20,10 @@ lat_lon = lat_lon.split(',')
 # lat = lat_lon['latitude']
 # print("lon:" + lon)
 # print("lat:" + lat)
-endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee+shop&location=" + \
+endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=&location=" + \
     lat_lon[0] + "," + lat_lon[1] + \
-    "&radius=1&region=ar&type=cafe,bakery&key=AIzaSyD1qlq7FWZSpYjdpVdyWlDeVdEhFGhkaqk"
+    "&radius=1&region=ar&type=" + typeLugar + \
+    "&key=AIzaSyD1qlq7FWZSpYjdpVdyWlDeVdEhFGhkaqk"
 api_url = "http://localhost:5050/apiansw"
 
 res = requests.get(endpoint_url, params=params)

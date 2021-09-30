@@ -25,6 +25,7 @@ app.get('/apiansw', (req, res) => {
 
 app.post('/apiansw', (req, res) => {
   console.log("HICIERON UN POST");
+  shops = []
   shops = req.body;
   console.log(shops);
 });
@@ -32,7 +33,8 @@ app.post('/apiansw', (req, res) => {
 let lat = 0;
 let lon = 0;
 let body = 0;
-let arr = []
+let arr = [];
+let type = "";
 app.get('/location', (req, res) => {
   console.log(lat + " " + lon);
   // res.send(lat);
@@ -47,6 +49,15 @@ app.post('/location', (req, res) => {
   console.log("lon: " , lon)
   arr.push(lat)
   arr.push(lon)
+})
+
+app.get('/buscarLugar', (req, res) => {
+  res.send(type)
+})
+
+app.post('/buscarLugar', (req, res) => {
+  type = req.body.type
+  console.log(type)
 })
 
 
