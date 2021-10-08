@@ -180,3 +180,11 @@ nlu:
       - lenguajes
       - programas
       - aplicaciones
+
+  - intent: Lenguajes Programacion
+     examples: | 
+      - programación
+      - lenguaje
+      - lenguajes
+      - programas
+      - aplicaciones

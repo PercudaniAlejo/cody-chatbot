@@ -203,7 +203,7 @@ $('#close').click(function () {
 	$('.widget').toggle();
 });
 function Aprender(message){
-    fetch('http://localhost:8080/nuevo-intent', {
+    fetch('http://localhost:8080/primer-respuesta', {
         method: 'POST',
         body: JSON.stringify({
             "message": message,

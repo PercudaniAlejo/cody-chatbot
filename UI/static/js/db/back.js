@@ -209,7 +209,7 @@ console.log(arrSinonimos)
   });
 })
 
-app.post('/nuevo-intent',(req,res)=>{
+app.post('/primer-respuesta',(req,res)=>{
   var message = req.body.message
   aux="responses:";
   fs.readFile(PATH_DOMAIN, function(err, data){
@@ -237,6 +237,45 @@ app.post('/nuevo-intent',(req,res)=>{
   })
 });
 
+app.post('/buscar-intent', (req, res) => {
+  res.send(JSON.stringify("Guardado"))
+  console.log(req.body)
+  // res.send(JSON.stringify(req.body))
+  var message = req.body.message
+  // message = "programacion"
+  query = "SELECT *, MATCH(title, body) AGAINST('"+message+"') as rank FROM articulos WHERE MATCH(title, body) AGAINST('"+message+"') ORDER BY rank DESC"
+  conn.query(query, (err, rows) => {
+    if(err) throw err
+    console.log("Búsqueda: " + message)
+    let rankMayor = 0;
+    let titleMayor = "";
+    let bodyMayor = "";
+    for(var x in rows){
+      if (rankMayor < rows[x].rank) 
+        rankMayor = rows[x].rank;
+        titleMayor = rows[x].title;    
+        bodyMayor=rows[x].body;        
+      };
+    console.log("Rango de coincidencia: " + rankMayor)
+    console.log("Titulo del resultado: " + titleMayor)
+    intent = titleMayor
+  })
+});
 
+app.post('/nuevas-respuestas',(req,res)=>{
+  let message = req.body.message;
+  aux = "  utter_"+ intent +":";
+  fs.readFile(PATH_DOMAIN, function(err, data){
+    if(err)
+        return console.log(err)
+    const arrDOMAIN = data.toString().replace(/\r\n/g, '\n').split('\n')
+    let escribirEn = arrDOMAIN.indexOf(aux) + 1;
+      arrDOMAIN.splice(escribirEn, 0, '    - text: "'+ message +'"');
+      let writer = fs.createWriteStream(PATH_DOMAIN);
+      for(let i of arrDOMAIN){
+          writer.write(i + '\n');
+      }
+  })
+});
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)
