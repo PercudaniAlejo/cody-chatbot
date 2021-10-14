@@ -74,6 +74,7 @@ app.post('/intent', (req, res) => {
     bodyMayor = bodyMayor.toLowerCase();
     let arrBody= bodyMayor.split(' ')
     intent = titleMayor
+    if(intent!=""){
     let arrPeso = [];
     /*Vector con basura*/let arrBasura=['lo', 'una', 'de','para','el','la','con','sí','si','sin','que','qué','como','cuando','donde','este','y','ya','durante','sobre','según','igual','por','o','u','se','tambien','más','los','además','aparte','asimismo','tanto','han','tampoco','es','al','fueron','fue','no','su','en','a','un','las','sus','ha','entre'];
     let cont=0;
@@ -181,7 +182,7 @@ console.log(arrSinonimos)
     fs.readFile(PATH_STORIES, function(err, data){
       if (err) 
         return console.log(err)
-      aux = "- story: "+intent;
+      aux = "  - story: "+intent;
       const arrSTORIES = data.toString().replace(/\r\n/g, '\n').split('\n')
       for(let i of arrSTORIES){
         if (i == aux) {
@@ -199,19 +200,17 @@ console.log(arrSinonimos)
         for(let i of arrSTORIES){
             writer.write(i + '\n')
         }
-        // CreateLine.write("\n" + "- story: " + intent + '\r\n')
-        // CreateLine.write("  steps:" + '\r\n')
-        // CreateLine.write("  - intent: "+intent+"\r\n")
-        // CreateLine.write("  - action: utter_"+intent+"\r\n")
       }
 
     })
+  }
   });
 })
 
 app.post('/primer-respuesta',(req,res)=>{
   var message = req.body.message
   aux="responses:";
+  if(intent!=""){
   fs.readFile(PATH_DOMAIN, function(err, data){
     if(err)
         return console.log(err)
@@ -235,14 +234,48 @@ app.post('/primer-respuesta',(req,res)=>{
         comprobarIntent = false
         //CreateLine.write("      - "+message+"\n") 
   })
+}
 });
 
+let intent2
 app.post('/buscar-intent', (req, res) => {
-  res.send(JSON.stringify("Guardado"))
-  console.log(req.body)
-  // res.send(JSON.stringify(req.body))
+  res.send(JSON.stringify("Guardado"));
+  let messageBuscarIntent = req.body.message;
+  console.log(messageBuscarIntent);
+  messageBuscarIntent= "      - "+messageBuscarIntent
+  intent2 = ""
+  fs.readFile(PATH_NLU, function(err, data){
+    if(err)
+        return console.log(err)
+    const arrNLU = data.toString().replace(/\r\n/g, '\n').split('\n')
+    aux = "    examples: |";
+    let cont=0;
+    let aux2;
+    let buscarIntent = true
+    for(let i of arrNLU)
+    {
+      if(i == aux){
+        aux2 = cont;
+      }
+      if (i.toLowerCase() == messageBuscarIntent.toLowerCase()){
+        buscarIntent = true
+        break;
+      }else{
+        buscarIntent = false
+      }
+      cont++;
+    }
+    if(buscarIntent){
+      aux2--;
+      console.log("Pos intent: ",aux2)
+      console.log("Intent: ",arrNLU[aux2])
+      let arrIntentconcat = arrNLU[aux2].split(" ")
+      intent2 = arrIntentconcat[arrIntentconcat.length-1]
+    } 
+    });
+    console.log(intent2)
+  if(intent2 == ""){
   var message = req.body.message
-  // message = "programacion"
   query = "SELECT *, MATCH(title, body) AGAINST('"+message+"') as rank FROM articulos WHERE MATCH(title, body) AGAINST('"+message+"') ORDER BY rank DESC"
   conn.query(query, (err, rows) => {
     if(err) throw err
@@ -253,18 +286,20 @@ app.post('/buscar-intent', (req, res) => {
     for(var x in rows){
       if (rankMayor < rows[x].rank) 
         rankMayor = rows[x].rank;
-        titleMayor = rows[x].title;    
-        bodyMayor=rows[x].body;        
+        titleMayor = rows[x].title;
+        bodyMayor=rows[x].body;
       };
     console.log("Rango de coincidencia: " + rankMayor)
     console.log("Titulo del resultado: " + titleMayor)
-    intent = titleMayor
+    if(titleMayor != "")
+      intent2 = titleMayor
   })
+}
 });
 
 app.post('/nuevas-respuestas',(req,res)=>{
   let message = req.body.message;
-  aux = "  utter_"+ intent +":";
+  aux = "  utter_"+ intent2 +":";
   fs.readFile(PATH_DOMAIN, function(err, data){
     if(err)
         return console.log(err)

@@ -1,16 +1,6 @@
 version: "2.0"
 
 stories:
-  - story: Lenguajes Programacion
-    steps:
-      - intent: Lenguajes Programacion
-      - action: utter_Lenguajes Programacion
-
-  - story: Lenguajes_de_programacion
-    steps:
-      - intent: Lenguajes_de_programacion
-      - action: utter_Lenguajes_de_programacion
-
   - story: happy path
     steps:
       - intent: greet
@@ -133,5 +123,15 @@ stories:
     steps:
       - intent: aprender
       - action: action_aprender
+
+
+
+
+
+
+
+
+
+
 
 
