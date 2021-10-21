@@ -23,39 +23,24 @@ app.use(cors());
 //#region DB connection
 const connectionDB = require("./db");
 const { config } = require('dotenv');
-const conn = connectionDB.connectionDB();
+const conn = connectionDB.connectionDB(); 
 if (conn) 
-  console.log("Conectado")
+console.log("Conectado")
 //#endregion
 
-const CreateLine = fs.createWriteStream('../../../../data/nlu.yml', {
+const PATH_NLU = './data/nlu.yml'
+const PATH_DOMAIN = './domain.yml'
+const PATH_STORIES = './data/stories.yml'
+const CreateLine = fs.createWriteStream(PATH_NLU, {
   flags: 'a' //flags: 'a' guarda la información antigua del archivo
 })
-var intent
-// app.get('/respuesta', (req, res) => {
-//   var intent = req.body
-//   res.send(intent)
-//   fs.readFile('../../../../data/nlu.yml', function(err, data){
-//     if(err)
-//         return console.log(err)
-//     const arr = data.toString().replace(/\r\n/g, '\n').split('\n')
-//       for(let i of arr){
-//           console.log(i)
-//       }
-//     CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
-//     CreateLine.write("     examples: | " + '\r\n')
-//   })
-// })
-const PATH_NLU = '../../../../data/nlu.yml'
-const PATH_DOMAIN = '../../../../domain.yml'
-const PATH_STORIES = '../../../../data/stories.yml'
-var query = ""
+let intent
+
+let query = ""
 app.post('/intent', (req, res) => {
   res.send(JSON.stringify("Guardado"))
   console.log(req.body)
-  // res.send(JSON.stringify(req.body))
   var message = req.body.message
-  // message = "programacion"
   query = "SELECT *, MATCH(title, body) AGAINST('"+message+"') as rank FROM articulos WHERE MATCH(title, body) AGAINST('"+message+"') ORDER BY rank DESC"
   conn.query(query, (err, rows) => {
     if(err) throw err
