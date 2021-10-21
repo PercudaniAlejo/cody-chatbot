@@ -16,10 +16,6 @@ for x in range(len(basura)):
     lat_lon = lat_lon.replace(basura[x], "")
 
 lat_lon = lat_lon.split(',')
-# lon = lat_lon['longitude']
-# lat = lat_lon['latitude']
-# print("lon:" + lon)
-# print("lat:" + lat)
 endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=&location=" + \
     lat_lon[0] + "," + lat_lon[1] + \
     "&radius=1&region=ar&type=" + typeLugar + \
@@ -35,7 +31,6 @@ while "next_page_token" in results:
     res = requests.get(endpoint_url, params=params)
     results = json.loads(res.content)
     shopSearch.extend(results['results'])
-#     print(results['results'])
     time.sleep(2)
 
 shop_name = []
@@ -56,9 +51,6 @@ for i in range(len(shopSearch)):
         shop_rating.append(shop['rating'])
     except:
         shop_rating.append('none')
-
-# shops = {"shop_name": shop_name[1:5],
-#          "shop_address": shop_address[1:5], "shop_rating": shop_rating[1:5]}
 
 data = [
     {
