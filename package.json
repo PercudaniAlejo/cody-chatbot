@@ -4,9 +4,11 @@
   "description": "INICIAR",
   "main": "index.js",
   "scripts": {
-    "backplaces": "nodemon ./UI/static/js/db/backplaces.js",
-    "back-main": "nodemon ./UI/static/js/db/back.js",
-    "dev": "start npm run backplaces && start npm run back-main"
+    "backplaces": "node ./UI/static/js/db/backplaces.js",
+    "back-main": "node ./UI/static/js/db/back.js",
+    "dev": "start npm run backplaces && start npm run back-main",
+    "rasa-init": "..\\venv\\Scripts\\activate && pause",
+    "rasa-train": "..\\venv\\Scripts\\activate && rasa train"
   },
   "repository": {
     "type": "git",

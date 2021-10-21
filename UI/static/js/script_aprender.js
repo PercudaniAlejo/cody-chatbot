@@ -1,21 +1,7 @@
-const arrMsgUsers = [];	
-let itemsLugares = [];	
-let arrLugares = [];
-let lugar = "";
-let comprobarMensaje = true
-let comprobarLugar = true
-let dicMensajeLugares = {
-	plaza: 'park',
-	hospital: 'hospital',
-	gimnasio: 'gym',
-	banco: 'bank'
-}
-let palabraBuscarLugar = ""
 let conocerintent=false;
 $('.usrInput').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
 	var text = $(".usrInput").val();
-	let arrText = []
 	if (keyCode === 13) {
 		if (text == "" || $.trim(text) == '') {//trim elimina espacios demas
 			e.preventDefault();
@@ -42,6 +28,16 @@ function saberIntent(message){
 		}),
 	})
 }
+
+let btnEntrenar = document.getElementById('btnEntrenar')
+btnEntrenar.addEventListener('click', ()=>{
+	fetch('http://localhost:8080/iniciar-train', {
+		method: 'POST',
+		body: JSON.stringify({
+			"message": true,
+		}),
+	})
+})
 
 function nuevaRespuesta(message){
 	console.log("mensaje a enviar a la api: " + message)
@@ -90,17 +86,7 @@ function send(message) {
 	});
 }
 
-// function newIntent(message) {
-// 	console.log("mensaje a enviar a la api: " + message)
-// 	fetch('http://localhost:8080/intent', {
-// 		method: 'POST',
-// 		body: JSON.stringify({
-// 			"message": message,
-// 		}),
-// 	})
-// }
-
-	// Mostrar respuesta del bot
+// Mostrar respuesta del bot
 function setBotResponse(val, message) {
 	console.log(val)
 	setTimeout(function () {

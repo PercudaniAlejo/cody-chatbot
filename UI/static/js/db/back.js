@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const mysql = require('mysql');
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 const fs = require('fs')
 var aux;
 let comprobarIntent=true;
@@ -297,5 +297,26 @@ app.post('/nuevas-respuestas',(req,res)=>{
       }
   })
 });
+
+const { stdout } = require('process');
+const { exec } = require('child_process');
+app.post('/iniciar-train', (req,res)=>{
+  if(req.body.message == true)
+  {
+    var exec = require('child_process').exec, child; 
+    child = exec('start TASKKILL /IM cmd.exe /F\n', function (err,stdout){
+      console.log("ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+          console.log(stdout);
+          child = exec('start npm run rasa-train & TASKKILL /IM cmd.exe /F\n', function (err,stdout){
+        console.log("ASDDDDDDDDDD");
+      })
+    })
+  }
+})
+
+// INICIA EL TRAIN PERO NUNCA ENTRA A LA FUNCTION DE exec()
+// TENEMOS ESCRIBIR LUEGO QUE RASA TRAIN TERMINA (PROBAR ESTO, MANTADOLO)
+// ESCRIBIR NPM RUN rasa-init  PARA INICAR RASA DE NUEVO
+
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)

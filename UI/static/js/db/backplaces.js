@@ -52,12 +52,13 @@ app.post('/location', (req, res) => {
 })
 
 app.get('/buscarLugar', (req, res) => {
-  res.send(type)
+  res.send(type);
+
 })
 
 app.post('/buscarLugar', (req, res) => {
-  type = req.body.type
-  console.log(type)
+  type = req.body.type;
+  console.log(type);
 })
 
 
