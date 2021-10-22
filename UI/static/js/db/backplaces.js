@@ -51,14 +51,18 @@ app.post('/location', (req, res) => {
   arr.push(lon)
 })
 
+const { stdout } = require('process');
+const { exec } = require('child_process');
 app.get('/buscarLugar', (req, res) => {
   res.send(type);
-
 })
 
 app.post('/buscarLugar', (req, res) => {
   type = req.body.type;
   console.log(type);
+  var exec = require('child_process').exec, child; 
+  child = exec('npm run lugares-init\n', (error, stdout,stderr) => {
+  })
 })
 
 

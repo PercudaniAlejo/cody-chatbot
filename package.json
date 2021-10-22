@@ -6,9 +6,10 @@
   "scripts": {
     "backplaces": "node ./UI/static/js/db/backplaces.js",
     "back-main": "node ./UI/static/js/db/back.js",
-    "dev": "start npm run backplaces && start npm run back-main",
+    "dev": "start /MIN npm run backplaces",
     "rasa-init": "..\\venv\\Scripts\\activate && pause",
-    "rasa-train": "..\\venv\\Scripts\\activate && rasa train"
+    "rasa-train": "..\\venv\\Scripts\\activate && rasa train",
+    "lugares-init": "start /MIN py .\\UI\\static\\python\\getPlaces.py"
   },
   "repository": {
     "type": "git",

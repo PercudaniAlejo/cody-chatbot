@@ -305,10 +305,10 @@ app.post('/iniciar-train', (req,res)=>{
   {
     var exec = require('child_process').exec, child; 
     child = exec('start TASKKILL /IM cmd.exe /F\n', function (err,stdout){
-      console.log("ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+      console.log("ACA ANTES DEL TRAIN");
           console.log(stdout);
           child = exec('start npm run rasa-train & TASKKILL /IM cmd.exe /F\n', function (err,stdout){
-        console.log("ASDDDDDDDDDD");
+        console.log("ACA EN EL TRAIN");
       })
     })
   }
