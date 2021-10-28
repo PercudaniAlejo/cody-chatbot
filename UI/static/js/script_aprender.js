@@ -100,38 +100,23 @@ function setBotResponse(val, message) {
 			newIntent(message);
 			comprobarMensaje=false;
 		} else {
-			//if we get response from Rasa
 			for (i = 0; i < val.length; i++) {
-				//check if there is text message
 				if (val[i].hasOwnProperty("text")) {
 					var BotResponse = '<img class="botAvatar" src="./static/img/botAvatar.png"><p class="botMsg">' + val[i].text + '</p><div class="clearfix"></div>';
 					$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
 				}
 
-				//check if there is image
 				if (val[i].hasOwnProperty("image")) {
 					var BotResponse = '<div class="singleCard">' +
 						'<img class="imgcard" src="' + val[i].image + '">' +
 						'</div><div class="clearfix">'
 					$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
 				}
-
-				//check if there is  button message
 				if (val[i].hasOwnProperty("buttons")) {
 					addSuggestion(val[i].buttons);
 				}
-
 			}
 			scrollToBottomOfResults();
 		}
-
 	}, 500);
 }
-// function Aprender(message){
-//     fetch('http://localhost:8080/nuevo-intent', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             "message": message,
-//         }),
-//     })
-// }
