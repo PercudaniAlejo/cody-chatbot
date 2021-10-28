@@ -304,9 +304,9 @@ app.post('/iniciar-train', (req,res)=>{
   if(req.body.message == true)
   {
     var exec = require('child_process').exec, child; 
-    child = exec('start TASKKILL /IM cmd.exe /F\n', function (err,stdout){ // mata rasa run
-      child = exec('start npm run rasa-train', function (err,stdout){ // inicia rasa train
-        child = exec('start npm run rasa-init', function (err,stdout){ // inicia rasa run
+    child = exec('start /MIN TASKKILL /IM cmd.exe /F\n', function (err,stdout){ // mata rasa run
+      child = exec('start /MIN npm run rasa-train', function (err,stdout){ // inicia rasa train
+        child = exec('start /MIN npm run rasa-init', function (err,stdout){ // inicia rasa run
         })
       })
     })
