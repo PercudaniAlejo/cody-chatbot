@@ -6,7 +6,7 @@
   "scripts": {
     "backplaces": "node ./UI/static/js/db/backplaces.js",
     "back-main": "node ./UI/static/js/db/back.js",
-    "dev": "start /MIN npm run backplaces && start /MIN npm run back-main",
+    "dev": "start /MIN npm run backplaces && start /MIN npm run back-main && start /MIN npm run rasa-init",
     "rasa-init": "..\\venv\\Scripts\\activate && rasa run -m models --enable-api --cors '*'",
     "rasa-train": "..\\venv\\Scripts\\activate && rasa train & TASKKILL /IM cmd.exe /F",
     "lugares-init": "start /MIN py .\\UI\\static\\python\\getPlaces.py"
