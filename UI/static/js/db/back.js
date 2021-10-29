@@ -301,16 +301,21 @@ app.post('/nuevas-respuestas',(req,res)=>{
 const { stdout } = require('process');
 const { exec } = require('child_process');
 app.post('/iniciar-train', (req,res)=>{
-  if(req.body.message == true)
-  {
     var exec = require('child_process').exec, child; 
-    child = exec('start /MIN TASKKILL /IM cmd.exe /F\n', function (err,stdout){ // mata rasa run
-      child = exec('start /MIN npm run rasa-train', function (err,stdout){ // inicia rasa train
-        child = exec('start /MIN npm run rasa-init', function (err,stdout){ // inicia rasa run
+    child = exec('taskkill /IM rasa.exe /F', function (err,stdout){
+      exec('start /MIN TASKKILL /IM cmd.exe /F\n', function (err,stdout){
+        exec('start /MIN npm run rasa-train', function (err,stdout){
+          exec('start /MIN npm run rasa-init', function (err,stdout){})
         })
       })
+
+      // }) // mata rasa run
+    //   child = exec('start /MIN npm run rasa-train', function (err,stdout){ // inicia rasa train
+    //     child = exec('start /MIN npm run rasa-init', function (err,stdout){ // inicia rasa run
+    //     })
+    //   })
+    // })
     })
-  }
 })
 
 // INICIA EL TRAIN PERO NUNCA ENTRA A LA FUNCTION DE exec()
