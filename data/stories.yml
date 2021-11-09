@@ -1,6 +1,16 @@
 version: "2.0"
 
 stories:
+  - story: Autos
+    steps:
+      - intent: Autos
+      - action: utter_Autos
+
+  - story: Futbol
+    steps:
+      - intent: Futbol
+      - action: utter_Futbol
+
   - story: Lenguajes_Programacion
     steps:
       - intent: Lenguajes_Programacion
@@ -128,3 +138,5 @@ stories:
     steps:
       - intent: aprender
       - action: action_aprender
+
+

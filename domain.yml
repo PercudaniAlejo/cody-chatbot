@@ -2,6 +2,8 @@ version: "2.0"
 intents:
   - greet
   - goodbye
+  - Autos
+  - Futbol
   - Lenguajes_Programacion
   - affirm
   - deny
@@ -30,6 +32,19 @@ actions:
   - action_listen
 
 responses:
+  utter_Autos:
+    - text: "Nunca te olvides de ponerte el cinturón y respetar la velocidad! "
+    - text: "Sabias que el fundador de Pagani fue Argentino?"
+    - text: "El auto mas rápido del mundo es el Bugatti Veyron "
+    - text: "mi auto favorito es el Audi RS 4"
+    - text: "Me encantan los autos"
+
+  utter_Futbol:
+    - text: "Nunca lo jugué, pues no puedo :("
+    - text: "yo soy de san lorenzo"
+    - text: "Se juega con 11 jugadores"
+    - text: "Es un deporte"
+
   utter_bot_challenge:
     - text: "No... por ahora. "
     - text: "No... por ahora. ;)"
@@ -125,3 +140,15 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+
+
+
+
+
+
+
+
+
+
+

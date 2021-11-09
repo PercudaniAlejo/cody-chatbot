@@ -180,3 +180,19 @@ nlu:
       - lenguajes
       - programas
       - aplicaciones
+
+  - intent: Futbol
+     examples: | 
+      - Jugador
+      - fútbol
+      - juego
+      - pelota
+      - deporte
+
+  - intent: Autos
+     examples: | 
+      - audi
+      - auto
+      - bmw
+      - automóvil
+      - moto
