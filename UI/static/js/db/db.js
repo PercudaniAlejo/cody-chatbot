@@ -11,7 +11,7 @@ function connectionDB(){
         // database: process.env.DB_DATABASE
         host: 'localhost',
         user: 'root',
-        database: 'cody_fulltext'
+        database: 'cody_fulltext2'
     });
     return connection
 }

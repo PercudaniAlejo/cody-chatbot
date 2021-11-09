@@ -82,7 +82,8 @@ nlu:
       - Eres un bot?
       - Eres humano?
       - Estoy hablando con un bot?
-      - Estoy hablando con un humano?
+      - Estoy habla ndo con un humano?
+      - Sos un humano?
 
   - intent: food
     examples: |
@@ -120,7 +121,6 @@ nlu:
 
   - intent: juego
     examples: |
-      - 
       - Cual es tu juego favorito?
       - Tienes algun juego favorito?
       - Te gusta algun juego?
@@ -172,3 +172,11 @@ nlu:
       - Tienes alguna canción favorita?
       - Te gusta alguna canción?
       - Que canción es tu favorita?
+
+  - intent: Lenguajes_Programacion
+    examples: |
+      - programación
+      - lenguaje
+      - lenguajes
+      - programas
+      - aplicaciones

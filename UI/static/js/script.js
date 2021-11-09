@@ -111,13 +111,10 @@ function setUserResponse(val) {
 	scrollToBottomOfResults();
 	$('.suggestions').remove();
 }
-
-// Scroll automÃ¡tico en el chat
 function scrollToBottomOfResults() {
 	var terminalResultsDiv = document.getElementById('chats');
 	terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
 }
-
 function send(message) {
 	console.log("Mensaje de usuario:", message)
 
@@ -130,10 +127,8 @@ function send(message) {
 			"sender": "Me"
 		}),
 		success: function (data, textStatus) {
-			if(data != null){
+			if(data != null)
 				setBotResponse( data, message);
-
-			}
 			console.log("Rasa Response: ", data, "\n Status:", textStatus)
 		}
 	});

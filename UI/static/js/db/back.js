@@ -308,19 +308,7 @@ app.post('/iniciar-train', (req,res)=>{
           exec('start /MIN npm run rasa-init', function (err,stdout){})
         })
       })
-
-      // }) // mata rasa run
-    //   child = exec('start /MIN npm run rasa-train', function (err,stdout){ // inicia rasa train
-    //     child = exec('start /MIN npm run rasa-init', function (err,stdout){ // inicia rasa run
-    //     })
-    //   })
-    // })
-    })
 })
-
-// INICIA EL TRAIN PERO NUNCA ENTRA A LA FUNCTION DE exec()
-// TENEMOS ESCRIBIR LUEGO QUE RASA TRAIN TERMINA (PROBAR ESTO, MANTADOLO)
-// ESCRIBIR NPM RUN rasa-init  PARA INICAR RASA DE NUEVO
-
+})
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)

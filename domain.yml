@@ -1,9 +1,8 @@
 version: "2.0"
-# rasa run -m models --enable-api --cors "*"
 intents:
   - greet
-  - Lenguajes_de_programacion
   - goodbye
+  - Lenguajes_Programacion
   - affirm
   - deny
   - mood_great
@@ -31,8 +30,30 @@ actions:
   - action_listen
 
 responses:
+  utter_bot_challenge:
+    - text: "No... por ahora. "
+    - text: "No... por ahora. ;)"
+
+  utter_Lenguajes_Programacion:
+    - text: "deus do informatica"
+
   utter_greet:
+    - text: "ola :V"
+    - text: "oli >.<"
+    - text: "que pasa flaco"
+    - text: "buenaaas"
+    - text: "Que onda pa"
+    - text: "HOLA!!!"
+    - text: "me despertaste... todo bien?"
+    - text: "Hoola!!!!!!!!!!!"
+    - text: "que onda amigazo. como va todo?"
+    - text: "bueeeeenas"
+    - text: "Qué tul? todo bien?"
     - text: "Hola! como estás?"
+
+  utter_affirm:
+    - text: "joya. segui asi"
+    - text: "perfecto"
 
   utter_cheer_up:
     - text: "Aqui tienes algo para animarte:"
@@ -45,6 +66,12 @@ responses:
     - text: "¡Genial, continúa así!"
 
   utter_goodbye:
+    - text: "Cuidate! que me gusta hablar con vos "
+    - text: "chau chau chauuu iuu "
+    - text: "nv"
+    - text: "Nos vemos! Yo voy a seguir estando acá..."
+    - text: "te espero acá :D"
+    - text: "Nos vemos papa!!!"
     - text: "Adiós"
 
   utter_iamabot:
@@ -83,11 +110,13 @@ responses:
 
   utter_sentir:
     - text: "No, porque soy un bot"
+    - text: "No... por ahora"
 
   utter_otrobot:
     - text: "Si, pero ninguno es mejor que yo 😎"
 
   utter_familia:
+    - text: "si... pero hace mucho no los veo"
     - text: "Mi familia son mis creadores, menos Fran, ese da miedo"
 
   utter_aprender:
@@ -96,36 +125,3 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
