@@ -75,7 +75,7 @@ $('.usrInput').on('keyup keypress', function (e) {
 					  "type": palabraBuscarLugar,
 					}),
 			  	})
-				  var botEsperadoLugares = "Dame un segundo que estoy buscando chabon"
+				  var botEsperadoLugares = "Dame un segundo que estoy buscando"
 				  var a = '<img class="botAvatar" src="./static/img/botAvatar.png"><p class="botMsg">' + botEsperadoLugares + '</p><div class="clearfix"></div>';
 				  $(a).appendTo('.chats').hide().fadeIn(1000);
 				setTimeout(()=>{ 

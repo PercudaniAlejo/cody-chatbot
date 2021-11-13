@@ -53,8 +53,6 @@ responses:
     - text: "deus do informatica"
 
   utter_greet:
-    - text: "ola :V"
-    - text: "oli >.<"
     - text: "que pasa flaco"
     - text: "buenaaas"
     - text: "Que onda pa"
@@ -69,6 +67,7 @@ responses:
   utter_affirm:
     - text: "joya. segui asi"
     - text: "perfecto"
+    - text: "Me parece perfecto!"
 
   utter_cheer_up:
     - text: "Aqui tienes algo para animarte:"
@@ -76,9 +75,15 @@ responses:
 
   utter_did_that_help:
     - text: "Te ayudó?"
+    - text: "Espero te haya gustado :D"
+    - text: "Buenardo, no?"
 
   utter_happy:
     - text: "¡Genial, continúa así!"
+    - text: "Bieeen"
+    - text: "god"
+    - text: "excelente, compañero"
+    - text: "joya... excelente noticia"
 
   utter_goodbye:
     - text: "Cuidate! que me gusta hablar con vos "
@@ -91,6 +96,9 @@ responses:
 
   utter_iamabot:
     - text: "Soy un bot, hecho en Rasa."
+    - text: "Hay veces que no sé bien qué o quién soy"
+    - text: "curiosa pregunta, nunca me la hice"
+    - text: "tumama"
 
   utter_color:
     - text: "Mi color favorito es el violeta"
@@ -126,6 +134,8 @@ responses:
   utter_sentir:
     - text: "No, porque soy un bot"
     - text: "No... por ahora"
+    - text: "Hay veces que siento pena por vos jajja XD"
+    - text: "que debería sentir?"
 
   utter_otrobot:
     - text: "Si, pero ninguno es mejor que yo 😎"
@@ -140,15 +150,3 @@ responses:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-
-
-
-
-
-
-
-
-
-
-

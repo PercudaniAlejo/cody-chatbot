@@ -127,7 +127,7 @@ console.log(arrSinonimos)
           }
         if(comprobarIntent){
           CreateLine.write("\n" + "  - intent: " + intent + '\r\n')
-          CreateLine.write("     examples: | " + '\r\n')
+          CreateLine.write("    examples: | " + '\r\n')
           for(let x in arrSinonimos)
           {
             CreateLine.write("      - " + arrSinonimos[x] + "\r\n")

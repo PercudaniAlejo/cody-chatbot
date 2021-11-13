@@ -182,7 +182,7 @@ nlu:
       - aplicaciones
 
   - intent: Futbol
-     examples: | 
+    examples: |
       - Jugador
       - fútbol
       - juego
@@ -190,7 +190,7 @@ nlu:
       - deporte
 
   - intent: Autos
-     examples: | 
+    examples: |
       - audi
       - auto
       - bmw

@@ -25,15 +25,4 @@ from rasa_sdk.executor import CollectingDispatcher
 #
 #         return []
 
-class ActionHelloWorldProgram(Action):
-
-    def name(self) -> Text:
-        return "action_hello_world_program"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(text="Custom Action:  Hello World! ")
-
-        return []
+#
